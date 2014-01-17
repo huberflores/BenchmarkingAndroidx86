@@ -22,8 +22,8 @@ public class UploadImage extends HttpServlet{
 		
 	private static final long serialVersionUID = 1L;
 
-	private static final String idQuery="AKIAJFIEZ5567RYA4UKQ";
-	private static final String secretKey ="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";
+	private static final String idQuery="xxxxxxxxxxxxxxxxxxxx";
+	private static final String secretKey ="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 	
 	String fileName;	
 	String fileNameShort;
