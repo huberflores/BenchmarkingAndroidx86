@@ -1,7 +1,7 @@
 Benchmarking Androidx86
 ======================
 
-The idea of benchmarking an Amazon instance with Dalvik x86 is to find out the level of concurrency-based QoS that can be achieved in computational offloading. 
+The idea of benchmarking an Amazon instance with Dalvik x86 is to find out the level of concurrency-based QoS that can be achieved in computational offloading operations. 
 
 Dalvik x86 can be created by following these scripts, we encourage to use AOSP code [script 1](https://gist.github.com/huberflores/4687766), [script 2](https://gist.github.com/huberflores/4714824)
 
