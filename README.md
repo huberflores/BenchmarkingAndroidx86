@@ -1,4 +1,4 @@
-Benchmarking Androidx86
+Benchmarking Android-x86
 ======================
 
 How to compile Android AOSP for x86? or at least a similar Android-based system.
