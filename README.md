@@ -26,4 +26,7 @@ Dalvik bytecode execution
 
 Notice that foo.jar can be foo.apk
 
-More detail instructions can be found at [Dalvik bytecode](https://gist.github.com/huberflores/9886339)
+
+Before asking for help, check this more detail instructions here [Dalvik bytecode](https://gist.github.com/huberflores/9886339)
+
+Moreover, you can also follow discussion here [Discussion](http://stackoverflow.com/questions/22579661/is-it-possible-to-get-an-estimation-of-the-number-of-instructions-executed-by-da)
