@@ -17,3 +17,12 @@ Please contact at huber AT ut DOT ee for granting access
 ![alt text](https://raw.githubusercontent.com/huberflores/BenchmarkingAndroidx86/master/Dalvik-x86.png "Android x86, Dalvik interface")
 
 
+Dalvik bytecode execution
+=========================
+
+
+![alt text](https://raw.githubusercontent.com/huberflores/BenchmarkingAndroidx86/master/Dalvik-x86-example.png "Android x86, Dalvik bytecode example")
+
+
+Notice that foo.jar can be foo.apk
+
