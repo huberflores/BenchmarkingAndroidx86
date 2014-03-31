@@ -11,3 +11,7 @@ Alternatively, we can provide you with an Amazon EC2 Image (AMI) with a running 
 Please contact at huber AT ut DOT ee for granting access
 
 
+
+![alt text](https://raw.githubusercontent.com/huberflores/BenchmarkingAndroidx86/master/Dalvik-x86.png "Android x86, Dalvik interface")
+
+
