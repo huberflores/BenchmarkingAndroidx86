@@ -26,3 +26,4 @@ Dalvik bytecode execution
 
 Notice that foo.jar can be foo.apk
 
+More detail instructions can be found at [Dalvik bytecode](https://gist.github.com/huberflores/9886339)
