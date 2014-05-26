@@ -1,4 +1,4 @@
-Benchmarking Android-x86
+Benchmarking Android-x86 through direct Dalvik-x86 invocation
 ======================
 
 How to compile Android AOSP for x86? or at least a similar Android-based system.
