@@ -123,7 +123,7 @@ public class APKHandler {
                 ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
                 
                 result = (ResultPack) ois.readObject();
-                System.out.println("AQUIIIIII" + result.getresult());
+                
                 setResultPack(result);
 
                 if((System.currentTimeMillis() - startTime) < NetInfo.waitTime){
