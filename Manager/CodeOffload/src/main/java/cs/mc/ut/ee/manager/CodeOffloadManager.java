@@ -41,6 +41,8 @@ public class CodeOffloadManager {
 	DynamicObjectInputStream ois = null;
 	ObjectOutputStream oos = null;
 	
+	Object sync;
+	
 	
 	public CodeOffloadManager(int port){
 		portnum = port;
@@ -100,6 +102,7 @@ public class CodeOffloadManager {
 		 	APKHandler dalvikProcess;
 		 
 	        Pack request = null;
+	        ResultPack response = null;
 
 	        public gatewayRouter() {
 	        }
@@ -119,31 +122,47 @@ public class CodeOffloadManager {
 	            	
 	                request = (Pack) ois.readObject();
 	                
-	                //Here we decide which APK to send into the dalvik
+	                //Here we decide which APK to send into the Dalvik
 	                
 	                
 	                
 	            	//We proceed to connect to the APK in order to execute the code
+	                
 	                
 	                dalvikProcess = new APKHandler(NetInfo.ipAddress, NetInfo.apkPool);
 	                dalvikProcess.setOffloadRequest(request);
 	                dalvikProcess.connect();
 	                dalvikProcess.execute();
 	                
-	                ResultPack r = dalvikProcess.getResultPack();
-	            	
-	            	
 	                
-	                System.out.println("Function name" +  request.getfunctionName());
+	                //ResultPack r = dalvikProcess.getResultPack();
 	                
-	                /*if (request.getfunctionName() != null && request.getfunctionName().length() > 0) {
-	       
-	                	//aqui se invoca el apk handler
+	                
+	                long wait = System.currentTimeMillis();
+	                boolean invocation = false;
+	                while (!invocation){
 	                	
-	                      
-	                } else {
-	                    returnnull(oos);
-	                }*/
+	                	if (dalvikProcess.getResultPack()!=null){
+	                		invocation = true;
+	                	}
+	                	
+	                	if ((System.currentTimeMillis() - wait)>5000){
+	                		invocation = true;
+	                	}
+	                	
+
+	                }
+	                
+	                
+	            	//send back the result to the client
+	            	response = dalvikProcess.getResultPack();
+	                
+	            	oos.writeObject(response);
+            		oos.flush(); 
+            		System.out.println("Respose was sent to the mobile");
+	                
+	                
+	       
 	            } catch (IOException e) {
 	                returnnull(oos);
 	            } catch (ClassNotFoundException e1) {
@@ -156,6 +175,7 @@ public class CodeOffloadManager {
 	            }
 	        }
 	    }
+	 
 
 	    public void returnnull(ObjectOutputStream oos){
 	        if(oos != null)

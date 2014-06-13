@@ -34,7 +34,7 @@ public class APKHandler {
 	Object result = null;
     Object state = null; 
 	
-	ResultPack offloadResult;
+	ResultPack offloadResult = null;
     
 	
 	public APKHandler(byte[] serverAddress, int port){
@@ -42,8 +42,6 @@ public class APKHandler {
 		this.serverAddress = serverAddress;
 		
 	}
-
-	
 	
 	public void setOffloadRequest(Pack mobileRequest){
 		this.proxyRequest = mobileRequest;
@@ -113,13 +111,7 @@ public class APKHandler {
 
                 oos.writeObject( MyPack );
                 oos.flush();
-                try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-                
+                                
                 ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
                 
                 result = (ResultPack) ois.readObject();
@@ -163,7 +155,8 @@ public class APKHandler {
     }
 	
 	public void setResultPack(ResultPack result){
-		this.offloadResult = result;
+			this.offloadResult = result;
+   	
 	}
 	
 	public ResultPack getResultPack(){
@@ -171,3 +164,9 @@ public class APKHandler {
 	}
 	
 }
+
+
+
+
+
+
