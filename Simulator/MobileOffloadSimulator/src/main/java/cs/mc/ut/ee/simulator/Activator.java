@@ -7,9 +7,8 @@
  * Please send inquiries to huber AT ut DOT ee
  */
 
-package cs.mc.ut.ee.manager;
+package cs.mc.ut.ee.simulator;
 
-import edu.ut.mobile.network.NetInfo;
 
 /*
  * author Huber Flores
@@ -17,22 +16,10 @@ import edu.ut.mobile.network.NetInfo;
 
 public class Activator {
 	
-	public static void main(String[] args) {
-        
-		EMCOServer server = new EMCOServer(NetInfo.port);
-		System.out.println("Starting Server");
-		new Thread(server).start();
-		
 
-		try {
-		    Thread.sleep(60 * 1000);
-		} catch (InterruptedException e) {
-		    e.printStackTrace();
-		}
-		System.out.println("Stopping Server");
-		server.stop();
-		
-		
-    }
+	public static void main(String[] args) {
+		        
+	}
+
 
 }
