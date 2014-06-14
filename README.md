@@ -30,3 +30,10 @@ Notice that foo.jar can be foo.apk
 Before asking for help, check more detail instructions here [Dalvik bytecode](https://gist.github.com/huberflores/9886339)
 
 Moreover, you can also follow discussion here [Discussion](http://stackoverflow.com/questions/22579661/is-it-possible-to-get-an-estimation-of-the-number-of-instructions-executed-by-da)
+
+
+
+How to cite
+===========
+
+soon...
