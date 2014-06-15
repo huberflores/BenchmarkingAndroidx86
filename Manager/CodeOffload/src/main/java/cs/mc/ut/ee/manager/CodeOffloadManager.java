@@ -38,6 +38,7 @@ public class CodeOffloadManager implements Runnable{
 
     public void run() {
         try {
+        	System.out.println("Handling a code offload request");
         
         	in = proxyConnection.getInputStream();
             out = proxyConnection.getOutputStream();
@@ -45,7 +46,8 @@ public class CodeOffloadManager implements Runnable{
             oos = new ObjectOutputStream(out);
             ois = new DynamicObjectInputStream(in);
         	
-        	ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
+        	//ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
+            ois.loadClassFromJar("/home/huber/isPrime_Server.jar");
         	
             request = (Pack) ois.readObject();
             
@@ -73,8 +75,9 @@ public class CodeOffloadManager implements Runnable{
             		invocation = true;
             	}
             	
-            	if ((System.currentTimeMillis() - wait)>5000){
+            	if ((System.currentTimeMillis() - wait)>100000){
             		invocation = true;
+            		System.out.println("Result was null or the execution exceed the waiting time");
             	}
             	
 
@@ -86,7 +89,7 @@ public class CodeOffloadManager implements Runnable{
         	oos.flush();
         	oos.writeObject(response);
     		oos.flush(); 
-    		System.out.println("Respose was sent to the mobile");
+    		System.out.println("Respose was sent to the mobile: " +  response.getresult());
             
             
    

@@ -25,7 +25,7 @@ public class Activator {
 		
 
 		try {
-		    Thread.sleep(60 * 1000);
+		    Thread.sleep(100 * 10000);
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
 		}

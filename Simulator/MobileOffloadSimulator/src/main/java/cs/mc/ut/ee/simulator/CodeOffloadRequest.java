@@ -14,6 +14,7 @@ public class CodeOffloadRequest implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		client = new BubbleSort(0);
+		client.sortFunction();
 	}
 	
 
