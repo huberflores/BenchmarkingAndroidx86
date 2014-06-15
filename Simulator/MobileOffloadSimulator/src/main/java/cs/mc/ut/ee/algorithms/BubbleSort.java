@@ -12,7 +12,7 @@ public class BubbleSort extends CloudRemotable {
 		
 		int x;
 	
-		public BubbleSort(int N){
+		public BubbleSort(int N){ 
 			x = N;
 		}
 		
