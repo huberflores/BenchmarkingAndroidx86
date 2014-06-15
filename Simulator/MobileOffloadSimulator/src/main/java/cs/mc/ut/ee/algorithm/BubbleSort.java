@@ -1,4 +1,4 @@
-package cs.mc.ut.ee.algorithms;
+package cs.mc.ut.ee.algorithm;
 
 
 import java.lang.reflect.Method;
