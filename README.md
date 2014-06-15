@@ -32,6 +32,20 @@ Before asking for help, check more detail instructions here [Dalvik bytecode](ht
 Moreover, you can also follow discussion here [Discussion](http://stackoverflow.com/questions/22579661/is-it-possible-to-get-an-estimation-of-the-number-of-instructions-executed-by-da)
 
 
+Installation
+===========
+
+Project are in mavenized for automatic compilation.
+
+$ cd ./Simulator
+$ mvn clean install
+$ cd target/
+$ java -jar MobileOffloadSimulator-0.0.1-SNAPSHOT.jar cs.mc.ut.ee.simulator.Controller
+Remote result: 6822.2117842 (client 1)
+Remote result: 5922.5678763 (client 2)
+and so on...
+
+
 
 How to cite
 ===========
