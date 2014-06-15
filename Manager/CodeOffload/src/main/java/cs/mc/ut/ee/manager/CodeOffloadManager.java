@@ -48,6 +48,7 @@ public class CodeOffloadManager implements Runnable{
         	
         	//ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
             ois.loadClassFromJar("/home/huber/isPrime_Server.jar");
+            
         	
             request = (Pack) ois.readObject();
             

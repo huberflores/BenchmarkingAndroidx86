@@ -1,6 +1,6 @@
 package cs.mc.ut.ee.simulator;
 
-import cs.mc.ut.ee.algorithm.BubbleSort;
+import cs.ut.ee.algorithm.BubbleSort;
 
 
 /*

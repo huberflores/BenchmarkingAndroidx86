@@ -115,6 +115,7 @@ public class APKHandler {
                 //ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
                 ois.loadClassFromJar("/home/huber/isPrime_Server.jar");
                 
+                
                 result = (ResultPack) ois.readObject();
                 
                 setResultPack(result);
