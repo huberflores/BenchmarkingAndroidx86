@@ -37,13 +37,26 @@ Installation
 
 Project are in mavenized for automatic compilation.
 
+
+```xml
 $ cd ./Simulator
+````
+
+```xml
 $ mvn clean install
+````
+
+```xml
 $ cd target/
+````
+
+```xml
 $ java -jar MobileOffloadSimulator-0.0.1-SNAPSHOT.jar cs.mc.ut.ee.simulator.Controller
 Remote result: 6822.2117842 (client 1)
 Remote result: 5922.5678763 (client 2)
 and so on...
+
+````
 
 
 
