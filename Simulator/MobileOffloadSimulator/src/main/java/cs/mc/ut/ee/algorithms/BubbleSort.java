@@ -45,7 +45,7 @@ public class BubbleSort extends CloudRemotable {
 
 		}
 		
-		public void sortFunction() {
+		public double sortFunction() {
 			Method toExecute;   
 	    	Class<?>[] paramTypes = null;
 	    	Object[] paramValues = null; 
@@ -58,14 +58,17 @@ public class BubbleSort extends CloudRemotable {
 						result = (Double) results.get(0);
 						copyState(results.get(1));
 						System.out.println("Remote result: " + result);
+						return result;
 					}else{
 						result = localsortFunction(); 
 						System.out.println("Local result: " + result);
+						return result;
 					}
 				}  catch (SecurityException se){
 				} catch (NoSuchMethodException ns){
 				}catch (Throwable th){
 				}
+				return localsortFunction();
 				
 		}
 		
