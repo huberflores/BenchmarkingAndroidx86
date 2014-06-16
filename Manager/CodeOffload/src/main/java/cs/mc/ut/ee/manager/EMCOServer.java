@@ -129,7 +129,7 @@ public class EMCOServer implements Runnable{
     
     /*
      * This method pushes the APKs from a particular application into the Dalvik
-     * Usually, APKs are push by the "Code Offload Manager"
+     * Usually, APKs are pushed by the "Code Offload Manager"
      * However, the java "Process" utility is to slow to activate the process, and thus
      * It is advisable to put the APKs to listen before receiving a code offload request
      */
