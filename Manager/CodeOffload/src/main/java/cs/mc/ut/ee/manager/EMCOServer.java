@@ -37,6 +37,9 @@ public class EMCOServer implements Runnable{
         this.serverPort = port;
         addResources(Commons.app1);
         
+        //
+        startApksFromApp("isPrime");
+        
     }
 
     public void run(){
@@ -119,10 +122,31 @@ public class EMCOServer implements Runnable{
     		}
     		
     		resources.add(new AppResources(appName, jarFile, availableApks));
-    		
-    		
+
     	}
     	
     }
+    
+    /*
+     * This method pushes the APKs from a particular application into the Dalvik
+     * Usually, APKs are push by the "Code Offload Manager"
+     * However, the java "Process" utility is to slow to activate the process, and thus
+     * It is advisable to put the APKs to listen before receiving a code offload request
+     */
+    public void startApksFromApp(String appName){
+    	
+    	for (int k = 0; k< files.getApkFiles().size(); k++){
+			if (files.getApkFiles().get(k).contains(appName)){
+				try {
+					Process send = Runtime.getRuntime().exec(new String[] {"sh", "-c", "cd /home/huber/Desktop/TechnicalInformation/x86Image/android-x86/; ./rund.sh -cp " + files.getApkFiles().get(k) +" " + "edu.ut.mobile.network.Main"});
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+    	
+    }
+    
 
 }

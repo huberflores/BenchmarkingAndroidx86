@@ -85,15 +85,15 @@ public class CodeOffloadManager implements Runnable{
              * BlubbleSort_Server_6002, etc.
              */
 
-        	Process send = Runtime.getRuntime().exec(new String[] {"sh", "-c", "cd /home/huber/Desktop/TechnicalInformation/x86Image/android-x86/; ./rund.sh -cp " + apk +" " + "edu.ut.mobile.network.Main"});
-
-        
+            //-TODO-(introduce a delay)
+        	//Process send = Runtime.getRuntime().exec(new String[] {"sh", "-c", "cd /home/huber/Desktop/TechnicalInformation/x86Image/android-x86/; ./rund.sh -cp " + apk +" " + "edu.ut.mobile.network.Main"});
+        	
+        	
         	/*
         	 * proceed to connect to the APK in order to execute the code
         	 */
-            
   
-            dalvikProcess = new APKHandler(NetInfo.ipAddress, getPort(apk));
+            dalvikProcess = new APKHandler(NetInfo.ipAddress, getPort(apk), jar);
             dalvikProcess.setOffloadRequest(request);
             dalvikProcess.connect();
             dalvikProcess.execute();

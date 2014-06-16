@@ -51,11 +51,14 @@ public class APKHandler {
     Object state = null; 
 	
 	ResultPack offloadResult = null;
+	
+	String jar = null;
     
 	
-	public APKHandler(byte[] serverAddress, int port){
+	public APKHandler(byte[] serverAddress, int port, String jar){
 		this.portnum = port;
 		this.serverAddress = serverAddress;
+		this.jar = jar;
 		
 	}
 	
@@ -128,10 +131,11 @@ public class APKHandler {
                 oos.writeObject( MyPack );
                 oos.flush();
                                 
-                //ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
-                ois.loadClassFromJar("/home/huber/isPrime_Server.jar");
-                
-                
+                /*
+                 * Load the class to construct the object
+                 * ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
+                 */
+                ois.loadClassFromJar(jar);
                 result = (ResultPack) ois.readObject();
                 
                 setResultPack(result);
