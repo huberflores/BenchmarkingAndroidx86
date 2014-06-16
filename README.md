@@ -58,6 +58,26 @@ and so on...
 
 ````
 
+```xml
+$ cd ./Manager
+````
+
+```xml
+$ mvn clean install
+````
+
+```xml
+$ cd target/
+````
+
+```xml
+$ java -jar CodeOffload-0.0.1-SNAPSHOT.jar
+Starting server...
+Handling a code offload request (client 1)
+Handling a code offload request (client 2)
+````
+
+
 
 
 How to cite
