@@ -1,7 +1,17 @@
+/*
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * Please send inquiries to huber AT ut DOT ee
+ */
+
 package cs.mc.ut.ee.manager;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -10,10 +20,16 @@ import java.io.OutputStream;
 import java.net.Inet4Address;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import edu.ut.mobile.network.NetInfo;
 import edu.ut.mobile.network.Pack;
 import edu.ut.mobile.network.ResultPack;
+
+/*
+ * author Huber Flores
+ */
+
 
 public class APKHandler {
 	
@@ -164,6 +180,7 @@ public class APKHandler {
 	public ResultPack getResultPack(){
 		return offloadResult;
 	}
+	
 	
 }
 

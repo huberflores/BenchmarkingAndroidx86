@@ -1,8 +1,21 @@
+/*
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * Please send inquiries to huber AT ut DOT ee
+ */
+
 package cs.mc.ut.ee.manager;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Stack;
 import java.io.IOException;
+
+import cs.mc.ut.ee.utilities.Commons;
 
 /*
  * author Huber Flores
@@ -14,9 +27,16 @@ public class EMCOServer implements Runnable{
     protected ServerSocket serverSocket = null;
     protected boolean      isStopped    = false;
     protected Thread       runningThread= null;
+    
+    ArrayList<AppResources> resources = new ArrayList<AppResources>();;
+    
+    FilesManagement files = FilesManagement.getInstance(); 
+    
 
     public EMCOServer(int port){
         this.serverPort = port;
+        addResources(Commons.app1);
+        
     }
 
     public void run(){
@@ -38,7 +58,7 @@ public class EMCOServer implements Runnable{
             }
             new Thread(
                 new CodeOffloadManager(
-                    clientSocket, "Code Offload Request")
+                    clientSocket, "isPrime", getResource("isPrime").getJarFile(), (String) getResource("isPrime").getApkPool().pop())
             ).start();
         }
         System.out.println("Server Stopped.") ;
@@ -64,6 +84,45 @@ public class EMCOServer implements Runnable{
         } catch (IOException e) {
             throw new RuntimeException("Cannot open port 6000", e);
         }
+    }
+    
+    
+    
+    private AppResources getResource(String appName){
+    	
+    	for (int i= 0; i<resources.size(); i++){
+    		if (resources.get(i).getAppName().equals(appName)){
+    			return resources.get(i);
+    		}
+    	}
+    	return null;
+    }
+    
+    
+    
+    private void addResources(String appName){
+    	
+    	if (getResource(appName)==null){
+    		//add the resource
+    		Stack availableApks = new Stack();
+    		for (int i = 0; i< files.getApkFiles().size(); i++){
+    			if (files.getApkFiles().get(i).contains(appName)){
+    				availableApks.push(files.getApkFiles().get(i));
+    			}
+    		}
+    		
+    		String jarFile = null;
+    		for (int j = 0; j< files.getJarFiles().size(); j++){
+    			if (files.getJarFiles().get(j).contains(appName)){
+    				jarFile = files.getJarFiles().get(j);
+    			}
+    		}
+    		
+    		resources.add(new AppResources(appName, jarFile, availableApks));
+    		
+    		
+    	}
+    	
     }
 
 }

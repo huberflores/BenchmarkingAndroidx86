@@ -1,3 +1,12 @@
+/*
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * Please send inquiries to huber AT ut DOT ee
+ */
+
 package cs.mc.ut.ee.manager;
 
 import java.io.IOException;
@@ -46,18 +55,13 @@ public class DynamicObjectInputStream extends ObjectInputStream {
 	public void loadClassFromJar(String pathToJar) {
 			
 		try{
-			JarFile jarFile = new JarFile(pathToJar);
-			Enumeration e = jarFile.entries();
-			
 			URL[] urls = { new URL("jar:file:" + pathToJar+"!/") };
             URLClassLoader cl = URLClassLoader.newInstance(urls);
 
             baseJarLoader = cl;
 		}catch (MalformedURLException e1) {
 			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		} 
 
 	}
 	
