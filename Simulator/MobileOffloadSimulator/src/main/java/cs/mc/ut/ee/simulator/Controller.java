@@ -27,7 +27,7 @@ public class Controller {
 		 }
 
 		new LoadGenerator().generateLoad(users);
-		System.out.println("Generating " + users + "code offload request(s)...");
+		System.out.println("Generating " + users + " code offload request(s)...");
 	}
 
 }
