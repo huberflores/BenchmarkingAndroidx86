@@ -1,11 +1,9 @@
 package edu.ut.mobile.network;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 public class Pack implements Serializable{
-    final static Logger logger = Logger.getLogger(Pack.class.getName());
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1;
     String functionName = null;
     Class stateType = null;
     Object state = null;

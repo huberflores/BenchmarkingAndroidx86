@@ -35,10 +35,10 @@ public class EMCOServer implements Runnable{
 
     public EMCOServer(int port){
         this.serverPort = port;
-        addResources(Commons.app1);
+        addResources(Commons.app3);
         
-        //
-        startApksFromApp("isPrime");
+        //Automatic activation of APK files
+        startApksFromApp("g_chess");
         
     }
 
@@ -61,7 +61,7 @@ public class EMCOServer implements Runnable{
             }
             new Thread(
                 new CodeOffloadManager(
-                    clientSocket, "isPrime", getResource("isPrime").getJarFile(), (String) getResource("isPrime").getApkPool().pop())
+                    clientSocket, "g_chess", getResource("g_chess").getJarFile(), (String) getResource("g_chess").getApkPool().pop())
             ).start();
         }
         System.out.println("Server Stopped.") ;
@@ -130,7 +130,7 @@ public class EMCOServer implements Runnable{
     /*
      * This method pushes the APKs from a particular application into the Dalvik
      * Usually, APKs are pushed by the "Code Offload Manager"
-     * However, the java "Process" utility is to slow to activate the process, and thus
+     * However, the java "Process" utility is too slow to activate the process, and thus
      * It is advisable to put the APKs to listen before receiving a code offload request
      */
     public void startApksFromApp(String appName){

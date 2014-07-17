@@ -13,10 +13,11 @@ public class Commons {
 	
 	public static int counterTest = 1;
 	
-	public static String jarDirectory = "/home/huber/";
+	public static String jarDirectory = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
 	
 	public static String app1 = "isPrime";
 	public static String app2 = "BubbleSort";
+	public static String app3 = "g_chess";
 	
 	public static String dalvikPath = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
 
