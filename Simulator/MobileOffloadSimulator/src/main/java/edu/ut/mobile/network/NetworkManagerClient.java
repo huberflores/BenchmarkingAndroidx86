@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.Inet4Address;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.List;
 
 
 public class NetworkManagerClient {
@@ -91,6 +92,14 @@ public class NetworkManagerClient {
                 oos.flush();
 
                 result = (ResultPack) ois.readObject();
+                
+                List<String> timestamps = result.getTimeStamps();
+                
+                String [] time1 = timestamps.get(0).split(",");
+                String [] time2 = timestamps.get(3).split(",");
+                
+                
+                System.out.println("Total time of the request: " + (Double.parseDouble(time2[0]) - Double.parseDouble(time1[0])));
 
                 if((System.currentTimeMillis() - startTime) < NetInfo.waitTime){
                     if(result == null)
@@ -99,7 +108,7 @@ public class NetworkManagerClient {
                         callingparent.setResult(result.getresult(), result.getstate());
                 }
 
-                oos.close();
+                oos.close(); 
                 ois.close();
 
                 in.close();

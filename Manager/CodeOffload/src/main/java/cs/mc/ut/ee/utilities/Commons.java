@@ -20,5 +20,7 @@ public class Commons {
 	public static String app3 = "g_chess";
 	
 	public static String dalvikPath = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
+	
+	public static String apkFilesPath = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
 
 }

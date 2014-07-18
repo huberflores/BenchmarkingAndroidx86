@@ -43,7 +43,7 @@ public class CodeOffloadRequest implements Runnable {
 				chess[j*8+i]=board[i][j];
 		
 		
-		float [] steps = client.minimax(chess, 3, false);
+		float [] steps = client.minimax(chess, 4, false);
 		
 		
 	}
