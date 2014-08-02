@@ -107,7 +107,7 @@ public class CodeOffloadManager implements Runnable{
             		invocation = true;
             	}
             	
-            	if ((System.currentTimeMillis() - wait)>100000){
+            	if ((System.currentTimeMillis() - wait)>1000000){
             		invocation = true;
             		System.out.println("Result was null or the execution exceed the waiting time");
             	}
