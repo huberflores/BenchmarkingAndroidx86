@@ -92,4 +92,6 @@ Handling a code offload request (client 2)
 How to cite
 ===========
 
-soon...
+- Flores, Huber, and Satish Srirama. ["Mobile code offloading: should it be a local decision or global inference?"](http://dl.acm.org/citation.cfm?id=2465722), the 11th International Conference on Mobile Systems, Applications and Services (MobiSys 2013).
+
+
