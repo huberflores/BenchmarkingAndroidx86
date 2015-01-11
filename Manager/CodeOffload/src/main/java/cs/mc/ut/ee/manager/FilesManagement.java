@@ -11,6 +11,8 @@ package cs.mc.ut.ee.manager;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 import cs.mc.ut.ee.utilities.Commons;
@@ -24,7 +26,7 @@ public class FilesManagement {
 	
 	ArrayList<String> jarFiles = null;
 	
-	ArrayList<String> apkFiles = null;
+	Map<Integer, String> apkFiles = null;
 
 	private FilesManagement(){ 
 		initializeFiles(Commons.jarDirectory);
@@ -43,7 +45,7 @@ public class FilesManagement {
 	 private void initializeFiles(String dirPath){
 
 				jarFiles = new ArrayList<String>();
-				apkFiles = new ArrayList<String>();
+				apkFiles = new HashMap<Integer, String>();
 
 				File f = new File(dirPath);
 				File[] files = f.listFiles();
@@ -51,8 +53,8 @@ public class FilesManagement {
 				for(int i=0; i < files.length; i++)
 				{
 					File file = files[i];
-					String filename = file.getName();
-					String ext = filename.substring(filename.lastIndexOf('.')+1, filename.length());
+					String fileName = file.getName();
+					String ext = fileName.substring(fileName.lastIndexOf('.')+1, fileName.length());
 
 					if(ext.equals("jar"))
 					{
@@ -60,7 +62,8 @@ public class FilesManagement {
 					}
 					
 					if (ext.equals("apk")){
-						apkFiles.add(file.getPath());
+						int port = getPort(fileName);
+						apkFiles.put(port,file.getPath());
 					}
 				}
 
@@ -68,7 +71,20 @@ public class FilesManagement {
 	}
 	 
 	 
-	public ArrayList<String> getApkFiles(){
+	private int getPort(String fileName){
+	
+		int pos1 = fileName.lastIndexOf("__")+2;
+		int pos2 = fileName.lastIndexOf('.');
+		String apkPort = fileName.substring(pos1, pos2);
+		
+		int port = Integer.valueOf(apkPort);
+		
+		
+		return port;
+	} 
+	 
+	 
+	public Map<Integer, String> getApkFiles(){
 		return this.apkFiles;
 	}
 	

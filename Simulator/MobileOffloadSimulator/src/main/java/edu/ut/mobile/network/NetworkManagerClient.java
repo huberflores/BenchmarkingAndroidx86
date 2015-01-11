@@ -95,11 +95,17 @@ public class NetworkManagerClient {
                 
                 List<String> timestamps = result.getTimeStamps();
                 
+                
                 String [] time1 = timestamps.get(0).split(",");
                 String [] time2 = timestamps.get(3).split(",");
                 
+                String [] time3 = timestamps.get(1).split(",");
+                String [] time4 = timestamps.get(2).split(",");
                 
-                System.out.println("Total time of the request: " + (Double.parseDouble(time2[0]) - Double.parseDouble(time1[0])));
+                double processTime = (Double.parseDouble(time4[0]) - Double.parseDouble(time3[0]));
+                
+                
+                System.out.println("Total time of the request: " + (Double.parseDouble(time2[0]) - Double.parseDouble(time1[0])) + "/" + "processing time: " + processTime );
 
                 if((System.currentTimeMillis() - startTime) < NetInfo.waitTime){
                     if(result == null)

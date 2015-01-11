@@ -13,14 +13,31 @@ public class Commons {
 	
 	public static int counterTest = 1;
 	
-	public static String jarDirectory = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
-	
+	/**
+	 * Testing apps
+	 */
 	public static String app1 = "isPrime";
 	public static String app2 = "BubbleSort";
 	public static String app3 = "g_chess";
 	
+	/**
+	 * Local computer setup
+	 */
+	public static String jarDirectory = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
+	
 	public static String dalvikPath = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
 	
 	public static String apkFilesPath = "/home/huber/Desktop/TechnicalInformation/x86Image/android-x86/";
+	
+	
+	/**
+	 * Amazon EC2 setup
+	 */
+	/*public static String jarDirectory = "/home/ubuntu/android-x86/";
+	
+	public static String dalvikPath = "/home/ubuntu/android-x86/";
+	
+	public static String apkFilesPath = "/home/ubuntu/android-x86/";*/
+	
 
 }

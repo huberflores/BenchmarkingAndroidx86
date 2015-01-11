@@ -12,10 +12,13 @@ package cs.mc.ut.ee.manager;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Stack;
 import java.io.IOException;
 
 import cs.mc.ut.ee.utilities.Commons;
+
 
 /*
  * author Huber Flores
@@ -28,10 +31,10 @@ public class EMCOServer implements Runnable{
     protected boolean      isStopped    = false;
     protected Thread       runningThread= null;
     
-    ArrayList<AppResources> resources = new ArrayList<AppResources>();;
+    public static ArrayList<AppResources> resources = new ArrayList<AppResources>();;
     
-    FilesManagement files = FilesManagement.getInstance(); 
-    
+    FilesManagement files = FilesManagement.getInstance();
+       
 
     public EMCOServer(int port){
         this.serverPort = port;
@@ -59,10 +62,17 @@ public class EMCOServer implements Runnable{
                 throw new RuntimeException(
                     "Error accepting client connection", e);
             }
-            new Thread(
-                new CodeOffloadManager(
-                    clientSocket, "g_chess", getResource("g_chess").getJarFile(), (String) getResource("g_chess").getApkPool().pop())
-            ).start();
+            
+        	if (!getResource("g_chess").getApkPool().isEmpty()){
+        	    new Thread(
+                        new CodeOffloadManager(
+                            clientSocket, "g_chess", getResource("g_chess").getJarFile(), 
+                            files.getApkFiles().get(getResource("g_chess").getApkPool().pop()))
+                    ).start();
+    		}else{
+    			System.out.println("No slots available for code offloading!");
+    		}
+    	
         }
         System.out.println("Server Stopped.") ;
     }
@@ -102,17 +112,21 @@ public class EMCOServer implements Runnable{
     }
     
     
-    
     private void addResources(String appName){
     	
     	if (getResource(appName)==null){
-    		//add the resource
-    		Stack availableApks = new Stack();
-    		for (int i = 0; i< files.getApkFiles().size(); i++){
-    			if (files.getApkFiles().get(i).contains(appName)){
-    				availableApks.push(files.getApkFiles().get(i));
+    		Set<Integer> ports = files.getApkFiles().keySet();
+    		Iterator<Integer> iterator = ports.iterator();
+    
+    		Stack<Integer> availableApks = new Stack<Integer>();
+    		while (iterator.hasNext()){
+    			int apkPort = iterator.next();
+    			if (files.getApkFiles().get(apkPort).contains(appName)){
+    				availableApks.push(apkPort);
     			}
+    			
     		}
+    		
     		
     		String jarFile = null;
     		for (int j = 0; j< files.getJarFiles().size(); j++){
@@ -127,6 +141,8 @@ public class EMCOServer implements Runnable{
     	
     }
     
+    
+    
     /*
      * This method pushes the APKs from a particular application into the Dalvik as a process named 'dalvikvm'
      * Usually, APKs are pushed by the "Code Offload Manager"
@@ -134,19 +150,61 @@ public class EMCOServer implements Runnable{
      * It is advisable to put the APKs to listen before receiving a code offload request
      */
     public void startApksFromApp(String appName){
+    	  	
+    	Set<Integer> ports = files.getApkFiles().keySet();
+    	Iterator<Integer> iterator = ports.iterator();
     	
-    	for (int k = 0; k< files.getApkFiles().size(); k++){
-			if (files.getApkFiles().get(k).contains(appName)){
-				try {
-					Process send = Runtime.getRuntime().exec(new String[] {"sh", "-c", "cd " + Commons.apkFilesPath +";" + "./rund.sh -cp " + files.getApkFiles().get(k) +" " + "edu.ut.mobile.network.Main"});
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
+    	while(iterator.hasNext()){
+    		int apkPort = iterator.next();
+    		if (files.getApkFiles().get(apkPort).contains(appName)){
+    			try {
+    				//double starTime = System.currentTimeMillis();
+    				Process send = Runtime.getRuntime().exec(new String[] {"sh", "-c", "cd " + Commons.apkFilesPath +";" + "./rund.sh -cp " + files.getApkFiles().get(apkPort) +" " + "edu.ut.mobile.network.Main"});
+    				
+    				//System.out.println("Pushing time : " + (System.currentTimeMillis() - starTime));
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+    		}
+    		
+    	}
+    	
+    	new Thread(
+                new CheckPortAvailability()
+            ).start();
+    	
+    }
+    
+ 
+    class CheckPortAvailability implements Runnable {
+    	
+		public void run() {
+	
+			while(!isStopped()){			
+				System.out.println("Available ports : " + getResource("g_chess").getApkPool().toString());
+				
+				Set<Integer> ports = files.getApkFiles().keySet();
+				Iterator<Integer> iterator = ports.iterator();
+				
+				while(iterator.hasNext()){
+					int port = iterator.next();
+					//System.out.println("The port " +  port + " is associated with file " +  files.getApkFiles().get(port));
+				}
+				
+		    	
+		    	try {
+					Thread.sleep(12000);
+				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+		    	
 			}
+			
 		}
     	
     }
+    
     
 
 }

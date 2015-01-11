@@ -15,8 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Stack;
+
 
 import cs.mc.ut.ee.utilities.Commons;
 
@@ -34,6 +33,8 @@ public class CodeOffloadManager implements Runnable{
     protected String mobileApp   = null;
     protected String jar = null;
     protected String apk = null;
+    
+    FilesManagement files = FilesManagement.getInstance();
     
 	APKHandler dalvikProcess;
 	 
@@ -89,25 +90,36 @@ public class CodeOffloadManager implements Runnable{
         	//Process send = Runtime.getRuntime().exec(new String[] {"sh", "-c", "cd /home/huber/Desktop/TechnicalInformation/x86Image/android-x86/; ./rund.sh -cp " + apk +" " + "edu.ut.mobile.network.Main"});
         	
         	
-        	/*
-        	 * proceed to connect to the APK in order to execute the code
+        	/**
+        	 * Proceed to connect to the APK in order to execute the code.
+        	 * Notice that the IP address of the invocation defines in which server the apk is located.
         	 */
   
+            //support for multi-servers
+            /* 
+            byte[] surrogate = {Integer.valueOf("192").byteValue(),
+            	Integer.valueOf("168").byteValue(),
+            	Integer.valueOf("1").byteValue(),
+            	Integer.valueOf("65").byteValue()};;
+            
+            dalvikProcess = new APKHandler(surrogate, getPort(apk), jar);*/
+            
             dalvikProcess = new APKHandler(NetInfo.ipAddress, getPort(apk), jar);
             dalvikProcess.setOffloadRequest(request);
             dalvikProcess.connect();
             dalvikProcess.execute();
                      
-            
+         
             long wait = System.currentTimeMillis();
             boolean invocation = false;
             while (!invocation){
             	
             	if (dalvikProcess.getResultPack()!=null){
             		invocation = true;
+            		System.out.println("Result was found");
             	}
             	
-            	if ((System.currentTimeMillis() - wait)>1000000){
+            	if ((System.currentTimeMillis() - wait)>30000){ //previous value 1000000
             		invocation = true;
             		System.out.println("Result was null or the execution exceed the waiting time");
             	}
@@ -149,6 +161,12 @@ public class CodeOffloadManager implements Runnable{
                 in = null;
                 out = null;
                 proxyConnection = null;
+                
+                
+                leavePortListeningForNextRequest();
+                
+                
+                
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -156,6 +174,34 @@ public class CodeOffloadManager implements Runnable{
             
           
         }
+    }
+    
+    
+    public void leavePortListeningForNextRequest(){
+    	int port = getPort(apk);
+    	try {
+			
+			Process send = Runtime.getRuntime().exec(new String[] {"sh", "-c", "cd " + Commons.apkFilesPath +";" + "./rund.sh -cp " + files.getApkFiles().get(port) +" " + "edu.ut.mobile.network.Main"});
+			Thread.sleep(500);
+			getResource(mobileApp).getApkPool().push(port);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    
+    private AppResources getResource(String appName){
+    	
+    	for (int i= 0; i<EMCOServer.resources.size(); i++){
+    		if (EMCOServer.resources.get(i).getAppName().equals(appName)){
+    			return EMCOServer.resources.get(i);
+    		}
+    	}
+    	return null;
     }
     
     

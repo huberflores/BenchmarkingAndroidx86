@@ -133,7 +133,7 @@ public class APKHandler {
                                 
                 /*
                  * Load the class to construct the object
-                 * ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
+                 * e.g., ois.loadClassFromJar("/home/huber/NQueens_Server.jar");
                  */
                 ois.loadClassFromJar(jar);
                 result = (ResultPack) ois.readObject();
@@ -161,6 +161,13 @@ public class APKHandler {
                 in = null;
                 out = null;
                 mysocket = null;
+                
+                /*if (result.getresult()!=null){
+                	System.out.println("finish with value" );	
+                }else{
+                	System.out.println("finish with null");
+                }*/
+                
 
             } catch (IOException ex) {
                 setResult(null, null);

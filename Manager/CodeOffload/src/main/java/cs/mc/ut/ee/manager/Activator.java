@@ -20,7 +20,7 @@ public class Activator {
 	public static void main(String[] args) {
         
 		EMCOServer server = new EMCOServer(NetInfo.port);
-		System.out.println("Starting Server");
+		System.out.println("Starting EMCO Server (Evidence-aware Mobile Computational Offloading)");
 		new Thread(server).start();
 		
 
